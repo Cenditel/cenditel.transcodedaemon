@@ -12,7 +12,7 @@ MFN=manipulatefilename.ManipulateFileName()
 ServiceList=manageZODBList.FilePortalList()
 
 modulesecurity.declarePublic('transcodedaemon')
-def transcodedaemon(PARAMETRES_TRANSCODE):
+def transcodedaemon():
 	print "The transcode is activated"
 	##############
 	#import pdb; pdb.set_trace()
@@ -25,21 +25,28 @@ def transcodedaemon(PARAMETRES_TRANSCODE):
 		PathToOriginalFile=listpath[0]
 		listpath=''
 		listpath=element.keys()
-		idvideo=listpath[0]
+		idfile=listpath[0]
 		print "It is the file to transcode: " + str(PathToOriginalFile)
-		ServiceList.DeleteElement(idvideo, PathToOriginalFile)
+		ServiceList.DeleteElement(idfile, PathToOriginalFile)
 		ServiceList.AddActiveTranscoding(PathToOriginalFile)
 		#import pdb;pdb.set_trace()
-		PathToTranscodedFile = MTD.transcode(PathToOriginalFile, PARAMETRES_TRANSCODE)
+		PathToTranscodedFile = MTD.transcode(PathToOriginalFile,
+						     ServiceList.root['Video_Parameters'],
+						     ServiceList.root['Audio_Parameters'],
+						     ServiceList.root['Video_ContentTypes'],
+						     ServiceList.root['Audio_ContentTypes'],)
 		ServiceList.RemoveActiveTranscoding()
-		ServiceList.AddReadyElement(idvideo, PathToTranscodedFile)
+		ServiceList.AddReadyElement(idfile, PathToTranscodedFile)
 		ServiceList.SaveInZODB()
 	print "Daemon is waiting for File"
 	return
 
 
 modulesecurity.declarePublic('newtrans_init_')
-def newtrans_init_(STORAGE, path, filenamesaved, PARAMETRES_TRANSCODE, idvideo):
+def newtrans_init_(STORAGE, path, filenamesaved,\
+		   idfile, VIDEO_PARAMETRES_TRANSCODE,\
+		   AUDIO_PARAMETRES_TRANSCODE,\
+		   audio_content_types, video_content_types):
 	PathToOriginalFile = STORAGE + path +'/'+ filenamesaved
 	newfolderfile=MTD.nginxpath(PathToOriginalFile)
 	print "EL NEW FOLDERFILE EN CONVERT" + newfolderfile
@@ -53,13 +60,42 @@ def newtrans_init_(STORAGE, path, filenamesaved, PARAMETRES_TRANSCODE, idvideo):
 	if ServiceList.CheckItemZODB('ready')==False:
 		ServiceList.AddObjectZODB('ready',[])
 		ServiceList.SaveInZODB()
-	if ServiceList.uploaded(idvideo, PathToOriginalFile)== False and ServiceList.available(idvideo, newfolderfile)== False and ServiceList.transcoding(PathToOriginalFile)== False:
-		ServiceList.RegisterWaitingFile(idvideo, PathToOriginalFile)
+	if ServiceList.CheckItemZODB('Video_Parameters')==False:
+		ServiceList.AddObjectZODB('Video_Parameters', VIDEO_PARAMETRES_TRANSCODE)
+		ServiceList.SaveInZODB()
+	if ServiceList.CheckItemZODB('Audio_Parameters')==False:
+		ServiceList.AddObjectZODB('Audio_Parameters', AUDIO_PARAMETRES_TRANSCODE)
+		ServiceList.SaveInZODB()
+	
+	if ServiceList.CheckItemZODB('Video_ContentTypes')==False:
+		ServiceList.AddObjectZODB('Video_ContentTypes', video_content_types)
+		ServiceList.SaveInZODB()
+	if ServiceList.CheckItemZODB('Audio_ContentTypes')==False:
+		ServiceList.AddObjectZODB('Audio_ContentTypes', audio_content_types)
+		ServiceList.SaveInZODB()
+
+	if ServiceList.root['Audio_Parameters']!=AUDIO_PARAMETRES_TRANSCODE:
+		ServiceList.root['Audio_Parameters']=AUDIO_PARAMETRES_TRANSCODE
+		ServiceList.SaveInZODB()
+	if ServiceList.root['Video_Parameters']!=VIDEO_PARAMETRES_TRANSCODE:
+		ServiceList.root['Video_Parameters']=VIDEO_PARAMETRES_TRANSCODE
+		ServiceList.SaveInZODB()
+
+	if ServiceList.root['Video_ContentTypes']!=video_content_types:
+		ServiceList.root['Video_ContentTypes']=video_content_types
+		ServiceList.SaveInZODB()
+	
+	if ServiceList.root['Audio_ContentTypes']!=audio_content_types:
+		ServiceList.root['Audio_ContentTypes']=audio_content_types
+		ServiceList.SaveInZODB()
+
+	if ServiceList.uploaded(idfile, PathToOriginalFile)== False and ServiceList.available(idfile, newfolderfile)== False and ServiceList.transcoding(PathToOriginalFile)== False:
+		ServiceList.RegisterWaitingFile(idfile, PathToOriginalFile)
 	import threading
 	if ServiceList.CurrentTranscoding()=="":
 		class MyThread(threading.Thread):
 			def run(self):
-				transcodedaemon(PARAMETRES_TRANSCODE)
+				transcodedaemon()
 		MyThread().start()
 	return
 modulesecurity.apply(globals())
