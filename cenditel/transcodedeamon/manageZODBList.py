@@ -26,8 +26,11 @@ class FilePortalList(object):
 	"""
 	#TODO: Revisar Puntos de Montaje
 	"""
-	import pdb; pdb.set_trace()
-	self.site=getSite()
+	#import pdb; pdb.set_trace()
+	if getSite()==None:
+	    pass
+	else:
+	    self.site=getSite()
         self.waiting=[]
         self.video ={"":""}
         self.current=""
@@ -80,7 +83,7 @@ class FilePortalList(object):
                 TemporalList.append(self.video)
                 del(self.root['waiting'])
                 self.root['waiting']=TemporalList
-                self.SaveInZODB()
+                #self.SaveInZODB()
                 """
                 Ver cambio de valor con pdb, ver cuando cambia a None
                 """

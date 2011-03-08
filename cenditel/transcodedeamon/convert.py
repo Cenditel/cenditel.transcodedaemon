@@ -27,17 +27,22 @@ def transcodedaemon():
 		listpath=element.keys()
 		idfile=listpath[0]
 		print "It is the file to transcode: " + str(PathToOriginalFile)
-		ServiceList.DeleteElement(idfile, PathToOriginalFile)
-		ServiceList.AddActiveTranscoding(PathToOriginalFile)
 		#import pdb;pdb.set_trace()
-		PathToTranscodedFile = MTD.transcode(PathToOriginalFile,
+		if os.path.isfile(PathToOriginalFile):
+			ServiceList.DeleteElement(idfile, PathToOriginalFile)
+			ServiceList.AddActiveTranscoding(PathToOriginalFile)
+			PathToTranscodedFile = MTD.transcode(PathToOriginalFile,
 						     ServiceList.root['Video_Parameters'],
 						     ServiceList.root['Audio_Parameters'],
 						     ServiceList.root['Video_ContentTypes'],
 						     ServiceList.root['Audio_ContentTypes'],)
-		ServiceList.RemoveActiveTranscoding()
-		ServiceList.AddReadyElement(idfile, PathToTranscodedFile)
-		ServiceList.SaveInZODB()
+			ServiceList.RemoveActiveTranscoding()
+			ServiceList.AddReadyElement(idfile, PathToTranscodedFile)
+			ServiceList.SaveInZODB()
+		else:
+			ServiceList.DeleteElement(idfile, PathToOriginalFile)
+			print "NOT FOUND "+ PathToOriginalFile
+			ServiceList.SaveInZODB()
 	print "Daemon is waiting for File"
 	return
 

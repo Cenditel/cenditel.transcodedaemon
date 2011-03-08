@@ -1,7 +1,6 @@
 #python import
 import os
 import urlparse
-
 #zope import
 from Products.Five.browser import BrowserView
 from zope.component import queryUtility

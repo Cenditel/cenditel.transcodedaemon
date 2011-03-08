@@ -13,7 +13,7 @@ from zope.interface import implements
 from Acquisition import aq_inner
 from zope.component import getMultiAdapter
 #######################################
-from cenditel.trancodedeamon import transcodedeamonMessageFactory as _
+from cenditel.transcodedeamon import transcodedeamonMF as _
 
 
 #Acquisition.interfaces.Interface
@@ -90,9 +90,10 @@ class ManipulateFileName:
 	try:
 	    file=open(STORAGE + path +'/fss.cfg','r');
 	    cad=file.read();
-	    return cad[19:len(cad)-2];
+	    filename = cad[19:len(cad)-2]
+	    return {'filename': filename, 'ErrorBol':False}
 	except IOError:
-	    ErrorDic={'ErrorMSG':_("Error open the configuration file" + STORAGE + path +/fss.cfg"), 'ErrorBol':True}
+	    ErrorDic={'ErrorMSG':_("Error open the configuration file: ") + STORAGE + path +"/fss.cfg", 'ErrorBol':True}
 	    return  ErrorDic
 
     security.declarePublic('ReturnFileSizeOfFileInHardDrive')

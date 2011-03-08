@@ -92,9 +92,13 @@ class MyTranscodeDeamon:
 		del(mime)
 		if mimetype in video_content_types:
 			#TODO usar aqui stdout como con file 
-			os.system("ffmpeg -i " + filebash + " " + VIDEO_PARAMETRES_TRANSCODE + " "+ output)
+			info=subprocess.Popen("/usr/bin/env ffmpeg -i " + filebash + " "\
+					      + VIDEO_PARAMETRES_TRANSCODE + " "+ output,\
+					      shell=True,stdout=subprocess.PIPE).communicate()
 		elif mimetype in audio_content_types:
-			os.system("ffmpeg -i "+ filebash + " " + AUDIO_PARAMETRES_TRANSCODE + " " + output)
+			info=subprocess.Popen("/usr/bin/env ffmpeg -i " + filebash + " "\
+					      + AUDIO_PARAMETRES_TRANSCODE + " "+ output, \
+					      shell=True, stdout=subprocess.PIPE).communicate()
 		return output
 
 Globals.InitializeClass(MyTranscodeDeamon)
