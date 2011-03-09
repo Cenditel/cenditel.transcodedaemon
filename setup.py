@@ -3,7 +3,7 @@ import os
 
 version = '0.1'
 
-setup(name='Cenditel Transcode Daemon for Multimedia formats',
+setup(name='cenditel.transcodedeamon',
       version=version,
       description="This package provide a transcode deamon using ffmpeg to get ogg vorbis theora multimedia files",
       long_description=open("README.txt").read() + "\n" +
