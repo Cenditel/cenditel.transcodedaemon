@@ -122,7 +122,10 @@ def type_custom_delete(object, evt):
     audio_content_types=settings.audio_valid_content_types
     video_content_types=settings.video_valid_content_types
     STORAGE = RemoveSlash(settings.mount_point_fss)
-    name_original_file=object._v_fss_props[object.Type()].title
+    try:
+        name_original_file=object._v_fss_props[object.Type()].title
+    except KeyError:
+        name_original_file=object._v_fss_props[object.portal_type].title
     extension=MTD.CheckExtension(name_original_file)
     folderpath=RemoveSlashIfNecesary(urlparse(object.absolute_url())[2])
     path_of_object=path.join(STORAGE,folderpath,name_original_file)
