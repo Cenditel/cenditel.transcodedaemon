@@ -1,9 +1,4 @@
-#i18ndude rebuild-pot --pot ./Content.pot \ 
-#                     --merge ../i18n/generated.pot \ 
-#                     --exclude=`find ../profiles -name "*.*py"` \
-#                     --create content ../ || exit 1
-
-i18ndude rebuild-pot --pot ./transcodedeamon.pot --create cenditel.transcodedeamon ../  || exit 1 
+i18ndude rebuild-pot --pot ./transcodedeamon.pot --merge ./manual.pot --create cenditel.transcodedeamon ../  || exit 1 
 i18ndude sync --pot ./transcodedeamon.pot ./*/LC_MESSAGES/transcodedeamon.po
 
 WARNINGS=`find . -name "*pt" | xargs i18ndude find-untranslated | grep -e '^-WARN' | wc -l`
