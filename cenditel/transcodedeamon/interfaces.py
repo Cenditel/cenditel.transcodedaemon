@@ -6,6 +6,7 @@ from zope import schema
 from zope.interface import Interface
 
 from plone.theme.interfaces import IDefaultPloneLayer
+
 try:
     from cenditel.video.config import CONTROL as video
 except ImportError:
@@ -22,6 +23,10 @@ description_ffmpeg_parameters_line = _(u"This line has all the parameters to use
 
 
 description_valid_content_types = _(u"Those are the valid content types that can be uploaded to the server using cenditel multimedia products, to load a new content type the mimetype must have a space after him")
+
+    
+class IThemeSpecific(IDefaultPloneLayer):
+        """Marker interface that defines a Zope 3 browser layer."""
 
 
 class ITranscodeSetings(Interface):
@@ -77,7 +82,4 @@ class ITranscodeSetings(Interface):
                                                )
     else:
         pass
-    
-class IThemeSpecific(IDefaultPloneLayer):
-        """Marker interface that defines a Zope 3 browser layer."""
         
