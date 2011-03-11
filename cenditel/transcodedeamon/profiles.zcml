@@ -15,4 +15,15 @@
                        description gs_profiles_default_description;"
       />
   
+  <!-- Register the Uninstall GenericSetup extension profile
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Cenditel Transcode Daemon for Multimedia formats Uninstall Profile"
+      directory="profiles/uninstall"
+      description="Uninstall a default configuration for cenditel.transcodedeamon package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      i18n:attributes="title gs_profiles_uninstall_title;
+                       description gs_profiles_uninstall_description;"
+      />
+   -->
 </configure>
