@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-23 00:02+0000\n"
+"Project-Id-Version: cenditel.transcodedeamon\n"
+"POT-Creation-Date: 2011-02-18 12:08-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,93 +22,89 @@ msgstr ""
 msgid "Cenditel Transcode Daemon Panel"
 msgstr ""
 
-#: ../browser/controlpanel.py:17
+#: ../browser/controlpanel.py:16
 msgid "Cenditel Transcode Daemon Settings"
 msgstr ""
 
 #. Default: "Enter the max file size, in MB (like 30)"
-#: ../interfaces.py:49
+#: ../interfaces.py:46
 msgid "Enter the max file size, in MB (like 30)"
 msgstr ""
 
 #. Default: "Enter the path of the mount point"
-#: ../interfaces.py:42
+#: ../interfaces.py:41
 msgid "Enter the path of the mount point"
 msgstr ""
 
-#: ../manipulatefilename.py:95
-msgid "Error open the configuration file"
+#: ../manipulatefilename.py:96
+msgid "Error open the configuration file: "
 msgstr ""
 
-#: ../interfaces.py:70
+#: ../interfaces.py:66
 msgid "Parameters of FFMPEG to use in audio transcode"
 msgstr ""
 
-#: ../interfaces.py:57
+#: ../interfaces.py:53
 msgid "Parameters of FFMPEG to use in video transcode"
 msgstr ""
 
-#: ../interfaces.py:30
-msgid "Specifies if the transcode is ON or OFF, 
-default is True"
+#: ../interfaces.py:32
+msgid "Specifies if the transcode is ON or OFF, default is ON"
 msgstr ""
 
 #. Default: "Enter the URL to the streaming server"
-#: ../interfaces.py:35
+#: ../interfaces.py:36
 msgid "The adress of the streaming server"
 msgstr ""
 
-#: ../interfaces.py:34
-msgid "The adress of the streaming server, could be apache or nginx"
+#: ../interfaces.py:35
+msgid "The adress of the streaming server, must be a Web server to publish the multimedia contents"
 msgstr ""
 
-#: ../interfaces.py:48
+#: ../interfaces.py:45
 msgid "The max file size that can be uploaded"
 msgstr ""
 
-#: ../interfaces.py:41
+#: ../interfaces.py:40
 msgid "The mount point of File System Storage"
 msgstr ""
 
-#: ../interfaces.py:58
+#: ../interfaces.py:54
 msgid "This line has all the parameters to use in FFMPEG to convert files between formats"
 msgstr ""
 
-#: ../interfaces.py:19
-msgid "This line has all the parameters to use in FFMPEG to convert files between formats:
-+by default:
+#: ../interfaces.py:21
+msgid "This line has all the parameters to use in FFMPEG to convert files between formats, by default:
 1) -b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000
- other recommend lines are:
+
+Optionally are others recommended FFMPEG parameters useful:
 2) -b 200k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 100k -ac 2 -ar 48000
 3) -aspect 16:9 -sameq -vcodec libtheora -acodec libvorbis -ab 100k+
 "
 msgstr ""
 
-#: ../browser/controlpanel.py:18
+#. Default: "This line has all the parameters to use in FFMPEG to convert files between formats, by default:\n1) -b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000\n\nOptionally are others recommended FFMPEG parameters useful:\n2) -b 200k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 100k -ac 2 -ar 48000\n3) -aspect 16:9 -sameq -vcodec libtheora -acodec libvorbis -ab 100k+\n"
+#: ../interfaces.py:
+msgid "This line has all the parameters to use in FFMPEG to convert files between formats, by default:\n1) -b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000\n\nOptionally are others recommended FFMPEG parameters useful:\n2) -b 200k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 100k -ac 2 -ar 48000\n3) -aspect 16:9 -sameq -vcodec libtheora -acodec libvorbis -ab 100k+\n"
+msgstr ""
+
+#: ../browser/controlpanel.py:17
 msgid "This panel permits config some options of cenditel.transcodedeamon"
 msgstr ""
 
-#: ../interfaces.py:63
+#: ../interfaces.py:59
 msgid "Those are the valid content types that can be uploaded"
 msgstr ""
 
-#: ../interfaces.py:22
+#: ../interfaces.py:24
 msgid "Those are the valid content types that can be uploaded to the server using cenditel multimedia products, to load a new content type the mimetype must have a space after him"
 msgstr ""
 
-#: ../interfaces.py:29
+#: ../interfaces.py:31
 msgid "Transcode Switch"
 msgstr ""
 
-#: ../interfaces.py:62
+#: ../interfaces.py:58
 msgid "Video Valid Content Types to be uploaded"
-msgstr ""
-
-#: ../interfaces.py:79
-msgid "audio/midi audio/mpeg audio/x-realaudio "
-msgstr ""
-
-#: ../interfaces.py:66
-msgid "video/3gpp video/mpeg video/quicktime video/x-flv video/x-mng video/x-ms-wmv video/x-msvideo video/ogg video/mp4 video/x-ms-wmv "
 msgstr ""
 
