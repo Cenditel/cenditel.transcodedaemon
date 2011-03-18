@@ -1,5 +1,5 @@
-i18ndude rebuild-pot --pot ./transcodedeamon.pot --merge ./manual.pot --create cenditel.transcodedeamon ../  || exit 1 
-i18ndude sync --pot ./transcodedeamon.pot ./*/LC_MESSAGES/transcodedeamon.po
+i18ndude rebuild-pot --pot ./cenditel.transcodedeamon.pot --merge ./manual.pot --create cenditel.transcodedeamon ../  || exit 1 
+i18ndude sync --pot ./cenditel.transcodedeamon.pot ./*/LC_MESSAGES/cenditel.transcodedeamon.po
 
 WARNINGS=`find . -name "*pt" | xargs i18ndude find-untranslated | grep -e '^-WARN' | wc -l`
 ERRORS=`find . -name "*pt" | xargs i18ndude find-untranslated | grep -e '^-ERROR' | wc -l`
