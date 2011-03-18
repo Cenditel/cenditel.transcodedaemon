@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Komodo Project File - DO NOT EDIT -->
-<project id="e5d7d794-23af-488a-9856-bd6c495e3398" kpf_version="4" name="cenditeltranscodedeamon.kpf">
-<command cwd="/home/victor/buildouts/videoprueba/src/cenditel.transcodedeamon/cenditel/transcodedeamon" doNotOpenOutputWindow="0" env="" id="2cd3781a-6fe8-4f9a-bf90-60e7f41fc9e0" idref="e5d7d794-23af-488a-9856-bd6c495e3398" insertOutput="0" keyboard_shortcut="" name="/home/victor/buildouts/videoprueba/bin/zopepy convert.py" operateOnSelection="0" parseOutput="0" parseRegex="" runIn="new-console" showParsedOutputList="0">
-/home/victor/buildouts/videoprueba/bin/zopepy convert.py</command>
-<preference-set idref="e5d7d794-23af-488a-9856-bd6c495e3398">
-  <boolean id="import_live">1</boolean>
-</preference-set>
-</project>
