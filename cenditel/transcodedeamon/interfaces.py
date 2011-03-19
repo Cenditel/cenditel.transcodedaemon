@@ -9,11 +9,13 @@ from plone.theme.interfaces import IDefaultPloneLayer
 
 try:
     from cenditel.video.config import CONTROL as video
+    video=1
 except ImportError:
     video=0
 
 try:
     from cenditel.audio.config import CONTROL as audio
+    video=1
 except ImportError:
     audio=0
 
@@ -57,7 +59,7 @@ class ITranscodeSetings(Interface):
         max = 1024
     )
 
-    if audio==1:
+    if video==1:
         ffmpeg_parameters_video_line = schema.Text(
             title=_(u"Parameters of FFMPEG to use in video transcode"),
             description=_(u"This line has all the parameters to use in FFMPEG to convert files between formats, by default, this services have been preconfigured with following parameters ' -b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000'. Optionally are others recommended FFMPEG parameters useful like ' -b 200k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 100k -ac 2 -ar 48000' and ' -aspect 16:9 -sameq -vcodec libtheora -acodec libvorbis -ab 100k+'."),
@@ -73,10 +75,10 @@ class ITranscodeSetings(Interface):
         )
     else:
         pass
-    if video==1:
+    if audio==1:
         ffmpeg_parameters_audio_line = schema.Text(
             title=_(u"Parameters of FFMPEG to use in audio transcode"),
-            description=_(u"This line has all the parameters to use in FFMPEG to convert files between formats, by default, this services have been preconfigured with following parameters ' -b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000'. Optionally are others recommended FFMPEG parameters useful like ' -b 200k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 100k -ac 2 -ar 48000' and ' -aspect 16:9 -sameq -vcodec libtheora -acodec libvorbis -ab 100k+'."),
+            description=_(u"This line has all the parameters to use in FFMPEG to convert files between formats, by default, this services have been preconfigured with following parameters ' -acodec libvorbis -ab 128k -ac 2 -ar 48000'"),
             default=u'-acodec libvorbis -ab 128k -ac 2 -ar 48000',
             required=True,
         )
