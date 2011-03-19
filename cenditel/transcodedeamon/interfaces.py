@@ -19,11 +19,6 @@ except ImportError:
 
 from cenditel.transcodedeamon import transcodedeamonMF as _
 
-description_ffmpeg_parameters_line = _(u"This line has all the parameters to use in FFMPEG to convert files between formats, by default:\n1) -b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000\n\nOptionally are others recommended FFMPEG parameters useful:\n2) -b 200k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 100k -ac 2 -ar 48000\n3) -aspect 16:9 -sameq -vcodec libtheora -acodec libvorbis -ab 100k+\n")
-
-
-description_valid_content_types = _(u"Those are the valid content types that can be uploaded to the server using cenditel multimedia products, to load a new content type the mimetype must have a space after him")
-
     
 class IThemeSpecific(IDefaultPloneLayer):
         """Marker interface that defines a Zope 3 browser layer."""
@@ -56,12 +51,12 @@ class ITranscodeSetings(Interface):
                               )
     if audio==1:
         ffmpeg_parameters_video_line = schema.Text(title=_(u"Parameters of FFMPEG to use in video transcode"),
-                                                   description=_(u"This line has all the parameters to use in FFMPEG to convert files between formats", default= _(description_ffmpeg_parameters_line)),
+                                                   description=_(u"This line has all the parameters to use in FFMPEG to convert files between formats, by default, this services have been preconfigured with following parameters ' -b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000'. Optionally are others recommended FFMPEG parameters useful like ' -b 200k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 100k -ac 2 -ar 48000' and ' -aspect 16:9 -sameq -vcodec libtheora -acodec libvorbis -ab 100k+'."),
                                                    required=True,
                                                    default=u'-b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000',)
 
         video_valid_content_types = schema.Text(title=_(u"Video Valid Content Types to be uploaded"),
-                                                description=_(u"Those are the valid content types that can be uploaded", default= _(description_valid_content_types)),
+                                                description=_(u"Those are the valid content types that can be uploaded to the server using Cenditel multimedia products, to load a new content type the mimetype must have a space after him"),
                                                 required=True,
                                                 default=u'video/3gpp video/mpeg video/quicktime video/x-flv video/x-mng video/x-ms-wmv video/x-msvideo video/ogg video/mp4 video/x-ms-wmv '
                                                )
@@ -69,14 +64,12 @@ class ITranscodeSetings(Interface):
         pass
     if video==1:
         ffmpeg_parameters_audio_line = schema.Text(title=_(u"Parameters of FFMPEG to use in audio transcode"),
-                                                   description=_(u"This line has all the parameters to use in FFMPEG to convert files between formats",
-                                                   default= _(description_ffmpeg_parameters_line)
-                                                  ),
+                                                   description=_(u"This line has all the parameters to use in FFMPEG to convert files between formats, by default, this services have been preconfigured with following parameters ' -b 926k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 128k -ac 2 -ar 48000'. Optionally are others recommended FFMPEG parameters useful like ' -b 200k -aspect 16:9 -vframes 25000 -vcodec libtheora -acodec libvorbis -ab 100k -ac 2 -ar 48000' and ' -aspect 16:9 -sameq -vcodec libtheora -acodec libvorbis -ab 100k+'."),
                                   required=True,
                                   default=u'-acodec libvorbis -ab 128k -ac 2 -ar 48000',)
 
         audio_valid_content_types = schema.Text(title=_(u"Video Valid Content Types to be uploaded"),
-                                                description=_(u"Those are the valid content types that can be uploaded", default= _(description_valid_content_types)),
+                                                description=_(u"Those are the valid content types that can be uploaded to the server using Cenditel multimedia products, to load a new content type the mimetype must have a space after him"),
                                                 required=True,
                                                 default=u'audio/midi audio/mpeg audio/x-realaudio ',
                                                )
