@@ -149,8 +149,7 @@ def type_custom_delete(object, evt):
         print "se cancelo el borrado del elemento"
         return
     if request.has_key('selected_obj_paths')==True and request.has_key('paths')==True:
-        pdb.set_trace()
-        RemoveObjectsFromHDD(extension, path_of_dir,trascoded_file, ElementID)
+        RemoveObjectsFromHDD(extension, path_of_dir, path_of_object, trascoded_file, ElementID)
         return
     if request.has_key('manage_delObjects')==True and request.has_key('ids'):
         """
