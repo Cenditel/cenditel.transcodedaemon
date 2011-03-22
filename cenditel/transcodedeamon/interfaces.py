@@ -86,7 +86,7 @@ class ITranscodeSetings(Interface):
         audio_valid_content_types = schema.Text(
             title=_(u"Video Valid Content Types to be uploaded"),
             description=_(u"Those are the valid content types that can be uploaded to the server using Cenditel multimedia products, to load a new content type the mimetype must have a space after him"),
-            default=u'audio/midi audio/mpeg audio/x-realaudio ',
+            default=u'audio/midi audio/mpeg audio/x-realaudio application/octet-stream ',
             required=True,
         )
     else:
