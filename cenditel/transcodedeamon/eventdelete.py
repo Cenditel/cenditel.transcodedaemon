@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 #importacion python
 from urlparse import urlparse, urljoin, urlsplit
 import urllib
@@ -13,6 +12,7 @@ from cenditel.transcodedeamon.convert import MTD
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from cenditel.transcodedeamon.interfaces import ITranscodeSetings
+from cenditel.transcodedeamon.utils import findThisProcess, isThisRunning, RemoveSlash, RemoveSlashIfNecesary
 
 from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 from Acquisition import aq_parent
@@ -20,49 +20,6 @@ from Acquisition import aq_parent
 import pdb
 import subprocess
 import re
-
-def findThisProcess( process_name ):
-    """
-    Code from ShaChris23 in
-    http://stackoverflow.com/questions/38056/how-do-you-check-in-linux-with-python-if-a-process-is-still-running
-    """
-    ps = subprocess.Popen("ps -eaf | grep "+process_name, shell=True, stdout=subprocess.PIPE)
-    output = ps.stdout.read()
-    ps.stdout.close()
-    ps.wait()
-    return output
-
-# This is the function you can use  
-def isThisRunning( process_name ):
-    """
-    Code from ShaChris23 in
-    http://stackoverflow.com/questions/38056/how-do-you-check-in-linux-with-python-if-a-process-is-still-running
-    """
-    output = findThisProcess( process_name )
-    if re.search(process_name, output) is None:
-        return False
-    else:
-        return True
-
-def RemoveSlash(path):
-    reverse=path[::-1]
-    newpath=""
-    if reverse[0]=='/':
-        for x in path[:-1]:
-            newpath=newpath+x
-        return newpath
-    else:
-        return path
-
-def RemoveSlashIfNecesary(path):
-    if path[0]=='/':
-        newpath=''
-        for x in path[1:]:
-            newpath=newpath+x
-        return newpath
-    else:
-        pass
-
 
 def RemoveObjectsFromHDD(extension, path_of_dir, path_of_object, trascoded_file, ElementID):
     if extension is "ogg" or extension is "OGG":
@@ -93,8 +50,8 @@ def RemoveObjectsFromHDD(extension, path_of_dir, path_of_object, trascoded_file,
             if path_of_object is ServiceList.root['current']:
                 ServiceList.root['current']=""
         elif ServiceList.root['waiting'] is not None:
-            if {ElementID:trascoded_file} in ServiceList.root['waiting']:
-                ServiceList.root['waiting'].remove({ElementID:trascoded_file})
+            if {ElementID:path_of_object} in ServiceList.root['waiting']:
+                ServiceList.root['waiting'].remove({ElementID:path_of_object})
         elif path_of_object==ServiceList.root['current'] and isThisRunning('/usr/bin/ffmpeg -i '+path_of_object):
             print "El archivo actual esta siendo codificado"
             system('/usr/bin/killall ffmpeg')
@@ -117,10 +74,6 @@ def type_custom_delete(object, evt):
     self.SERVER = self.RemoveSlash(settings.adress_of_streaming_server)
     Probablemente no sea usado
     """
-    VIDEO_PARAMETRES_TRANSCODE = settings.ffmpeg_parameters_video_line
-    AUDIO_PARAMETRES_TRANSCODE = settings.ffmpeg_parameters_audio_line
-    audio_content_types=settings.audio_valid_content_types
-    video_content_types=settings.video_valid_content_types
     STORAGE = RemoveSlash(settings.mount_point_fss)
     try:
         name_original_file=object._v_fss_props[object.Type()].title
@@ -134,6 +87,9 @@ def type_custom_delete(object, evt):
     trascoded_file=MTD.nginxpath(path_of_object)
     realDelete = False
     ElementID=object.id
+    """
+    existe un caso distinto para request cuando es una copia
+    """
     if request.has_key('form.submitted')==True and request.has_key('REQUEST_METHOD')==True \
     and request.has_key('form.button.Cancel')==False:
         if request['REQUEST_METHOD']=='POST':
