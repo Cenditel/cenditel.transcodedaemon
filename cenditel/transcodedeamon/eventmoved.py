@@ -10,12 +10,11 @@ from time import sleep
 from cenditel.transcodedeamon.convert import ServiceList
 from cenditel.transcodedeamon.convert import MTD
 #Importacion del registro del panel de control cenditel.transcodedeamon
-from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
+
 from zope.app.component.hooks import getSite
 from iw.fss.config import ZCONFIG
 from cenditel.transcodedeamon.utils import findThisProcess, isThisRunning, RemoveSlash, RemoveSlashIfNecesary
-from shutil import copyfile, move
+from shutil import move
 
 def MoveObject(object, evt, STORAGE):
     file_object=object.getField(object.portal_type)
@@ -64,11 +63,6 @@ def MoveObject(object, evt, STORAGE):
             return
 
 
-def CopyObject(original_path,destination_path):
-    #TODO
-    pdb.set_trace()
-    return
-
 def type_custom_moved(object, evt, **kwargs):
     request = getattr(object, 'REQUEST', None)
     
@@ -108,9 +102,7 @@ def type_custom_moved(object, evt, **kwargs):
         if evt.oldParent==None:
             #Copy/Paste
             #TODO
-            original_path='?'
-            destination_path='?'
-            CopyObject(original_path,destination_path)
+            return
         else:
             #Cut/Paste
             #TODO
@@ -125,9 +117,7 @@ def type_custom_moved(object, evt, **kwargs):
         if evt.oldParent==None:
             #Copy/Paste
             #TODO
-            original_path='?'
-            destination_path='?'
-            CopyObject(original_path,destination_path)
+            return
         else:
             #Cut/Paste
             MoveObject(object, evt, STORAGE)
@@ -143,9 +133,7 @@ def type_custom_moved(object, evt, **kwargs):
         if evt.oldParent==None:
             #Copy/Paste
             #TODO
-            original_path='?'
-            destination_path='?'
-            CopyObject(original_path,destination_path)
+            return
         else:
             #Cut/Paste
             MoveObject(object, evt, STORAGE)
