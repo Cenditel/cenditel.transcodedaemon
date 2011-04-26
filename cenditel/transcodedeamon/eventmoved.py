@@ -1,20 +1,24 @@
 #!/usr/bin/env python
 
 #import
-import pdb
+#import pdb
 from urlparse import urlparse, urljoin, urlsplit
+from re import match
+from datetime import date
 import urllib
 from os import path, remove, system, listdir
 from time import sleep
+from shutil import move
 #Importaciones del Producto
 from cenditel.transcodedeamon.convert import ServiceList
 from cenditel.transcodedeamon.convert import MTD
+
 #Importacion del registro del panel de control cenditel.transcodedeamon
 
 from zope.app.component.hooks import getSite
 from iw.fss.config import ZCONFIG
 from cenditel.transcodedeamon.utils import findThisProcess, isThisRunning, RemoveSlash, RemoveSlashIfNecesary
-from shutil import move
+
 
 def MoveObject(object, evt, STORAGE):
     file_object=object.getField(object.portal_type)
@@ -127,10 +131,14 @@ def type_custom_moved(object, evt, **kwargs):
     portal = getSite()
     portal_path = '/'.join(portal.getPhysicalPath())
     STORAGE=ZCONFIG.storagePathForSite(portal)
-    if hasattr(evt, 'oldName')==True and hasattr(evt,'newName')==True:
-        if evt.newName is not evt.oldName:
-            RenameObject(object, evt, STORAGE)
-
+    #pdb.set_trace()
+    if hasattr(evt, 'oldName')==True and hasattr(evt,'newName')==True and evt.oldName is not None:
+        if match(object.portal_type+"."+str(date.today())+"."+"[+\d]", evt.oldName):
+            return
+        else:
+            if evt.newName is not evt.oldName:
+                RenameObject(object, evt, STORAGE)
+    
     if request.has_key('-C')==True and request.has_key('__factory__info__')==True \
     and request.has_key('__ac')==True and request.has_key('fieldname')==False \
     and request.has_key('value')==False:
