@@ -5,6 +5,7 @@ import os
 from AccessControl import ModuleSecurityInfo, getSecurityManager
 import Globals
 
+from cenditel.transcodedeamon.utils import CleanRegistry
 modulesecurity = ModuleSecurityInfo()
 MTD=mytranscode.MyTranscodeDeamon()
 MFN=manipulatefilename.ManipulateFileName()
@@ -28,6 +29,7 @@ def transcodedaemon():
 		idfile=listpath[0]
 		print "It is the file to transcode: " + str(PathToOriginalFile)
 		#import pdb;pdb.set_trace()
+		CleanRegistry(ServiceList)
 		if os.path.isfile(PathToOriginalFile):
 			ServiceList.DeleteElement(idfile, PathToOriginalFile)
 			ServiceList.AddActiveTranscoding(PathToOriginalFile)

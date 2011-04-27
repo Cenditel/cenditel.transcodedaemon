@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from os.path import isfile
+
 def RemoveSlash(path):
     reverse=path[::-1]
     newpath=""
@@ -61,3 +63,17 @@ def RemoveSlashIfNecesary(path):
         return newpath
     else:
         pass
+    
+def CleanRegistry(ServiceList):
+    import pdb;pdb.set_trace()
+    lists=('waiting','ready')
+    for list_element in lists:
+        for object_list in ServiceList.root[list_element]:
+            path_to_object=object_list.values()[0]
+            if isfile(path_to_object):
+                pass
+            else:
+                ServiceList.root[list_element].remove(object_list)
+    pdb.set_trace()
+    return
+
