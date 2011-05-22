@@ -65,7 +65,7 @@ def RemoveSlashIfNecesary(path):
         pass
     
 def CleanRegistry(ServiceList):
-    import pdb;pdb.set_trace()
+    #import pdb;pdb.set_trace()
     lists=('waiting','ready')
     for list_element in lists:
         for object_list in ServiceList.root[list_element]:
@@ -74,6 +74,6 @@ def CleanRegistry(ServiceList):
                 pass
             else:
                 ServiceList.root[list_element].remove(object_list)
-    pdb.set_trace()
+    #pdb.set_trace()
     return
 

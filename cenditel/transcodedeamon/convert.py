@@ -54,7 +54,9 @@ def newtrans_init_(STORAGE, path, filenamesaved,\
 		   idfile, VIDEO_PARAMETRES_TRANSCODE,\
 		   AUDIO_PARAMETRES_TRANSCODE,\
 		   audio_content_types, video_content_types):
-	PathToOriginalFile = STORAGE + path +'/'+ filenamesaved
+	###
+	PathToOriginalFile = os.path.join(STORAGE,path,filenamesaved)
+	###
 	newfolderfile=MTD.nginxpath(PathToOriginalFile)
 	print "EL NEW FOLDERFILE EN CONVERT" + newfolderfile
 	#import pdb; pdb.set_trace()

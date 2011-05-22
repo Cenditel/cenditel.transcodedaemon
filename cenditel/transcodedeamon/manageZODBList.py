@@ -174,7 +174,11 @@ class FilePortalList(object):
     security.declarePublic('Delete')
     def DeleteElement(self, idfile='', path=''):
         self.waiting=self.root['waiting']
-        element=self.waiting[0]
+	#import pdb; pdb.set_trace()
+        try:
+	    element=self.waiting[0]
+	except IndexError:
+	    return
         TemporalList=self.waiting.remove(element)
         del(self.root['waiting'])
         self.root['waiting']=TemporalList
