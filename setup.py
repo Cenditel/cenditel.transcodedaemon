@@ -3,10 +3,10 @@ import os
 
 version = '0.1'
 
-setup(name='cenditel.transcodedeamon',
+setup(name='cenditel.transcodedaemon',
       version=version,
       description="This package provide a transcode deamon using ffmpeg to get ogg vorbis theora multimedia files",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -28,7 +28,7 @@ setup(name='cenditel.transcodedeamon',
       author_email='elalcon89@gmail.com',
       maintainer='Leonardo J. Caballero G.',
       maintainer_email='leonardocaballero@gmail.com',
-      url='http://svn.plone.org/svn/collective/cenditel.transcodedeamon',
+      url='https://github.com/Cenditel/cenditel.transcodedaemon',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['cenditel'],
@@ -37,7 +37,7 @@ setup(name='cenditel.transcodedeamon',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-	  'plone.app.registry==1.0b2'
+          'plone.app.registry==1.0b2'
       ],
       entry_points="""
       # -*- Entry points: -*-
